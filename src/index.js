@@ -1,10 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { App } from 'components/App';
-import './index.css';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyle } from 'GlobalStyle';
+import { theme } from 'theme';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+function renderApp() {
+  root.render(
+    <ThemeProvider theme={theme}>
+      <BrowserRouter basename="/StickyNotes">
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </BrowserRouter>
+      <GlobalStyle />
+    </ThemeProvider>
+  );
+}
+
+renderApp();
