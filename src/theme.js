@@ -1,13 +1,11 @@
-//import '@fontsource-variable/montserrat';
+import '@fontsource/grape-nuts';
 
 export const theme = {
   colors: {
     text: '#141414',
     body: '#efefef',
-    primary500: '#6200ee',
-    primary600: '#4a01af',
-    primary700: '#4a01af69',
-    secondary: '#303030',
+    primary500: 'lightgreen',
+    secondary: '#191970',
     white: '#ffffff',
     black: '#000000',
     gray500: '#ededed',
@@ -18,7 +16,7 @@ export const theme = {
   },
 
   fonts: {
-    //primary: "'Montserrat Variable', sans-serif",
+    primary: "'Grape Nuts', cursive",
   },
 
   spacing: {
