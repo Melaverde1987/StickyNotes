@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import styled from 'styled-components';
+import { ThreeCircles } from 'react-loader-spinner';
 import {
   fetchCards,
   createCard,
@@ -8,18 +9,20 @@ import {
   deleteCardById,
   completeTask,
   saveCardPosition,
-} from 'api';
+} from 'api/api';
 
 import { Card } from 'components/Card';
 import { AddCard } from 'components/AddCard';
 
 const COLUMN_IDS = ['column-1', 'column-2', 'column-3'];
 
-export const App = () => {
+export const CardsList = () => {
   const [allCards, setAllCards] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getCards() {
+      setLoading(true);
       try {
         const cards = await fetchCards();
         setAllCards(
@@ -28,7 +31,7 @@ export const App = () => {
       } catch (error) {
         console.log(error);
       } finally {
-        //setLoading(false);
+        setLoading(false);
       }
     }
 
@@ -37,6 +40,7 @@ export const App = () => {
 
   const addCard = async newCard => {
     try {
+      setLoading(true);
       const createdTask = await createCard({
         ...newCard,
         items: [],
@@ -48,11 +52,14 @@ export const App = () => {
     } catch (error) {
       console.log(error);
       return false;
+    } finally {
+      setLoading(false);
     }
   };
 
   const editCard = async (id, updatedTask) => {
     try {
+      setLoading(true);
       const savedTask = await updateCard(id, updatedTask);
 
       setAllCards(prevTasks =>
@@ -63,11 +70,14 @@ export const App = () => {
     } catch (error) {
       console.log(error);
       return false;
+    } finally {
+      setLoading(false);
     }
   };
 
   const deleteCard = async cardId => {
     try {
+      setLoading(true);
       const deletedCard = await deleteCardById(cardId);
       setAllCards(prevState =>
         prevState.filter(card => card.id !== deletedCard.id)
@@ -75,7 +85,7 @@ export const App = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      //setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -134,6 +144,7 @@ export const App = () => {
     });
 
     try {
+      setLoading(true);
       await Promise.all(changedCards.map(saveCardPosition));
     } catch (error) {
       console.log('Position error', error);
@@ -148,15 +159,32 @@ export const App = () => {
       } catch (fetchError) {
         console.log(fetchError);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <main>
-      <h1>Todo List</h1>
-
+    <>
+      {loading && (
+        <ThreeCircles
+          visible={true}
+          height="100"
+          width="100"
+          color="lightgreen"
+          ariaLabel="three-circles-loading"
+          wrapperStyle={{
+            position: 'absolute',
+            zIndex: 10,
+            marginInline: 'auto',
+            left: 0,
+            right: 0,
+            width: 'fit-content',
+          }}
+          wrapperClass=""
+        />
+      )}
       <AddCard addCard={addCard} />
-
       <DragDropContext onDragEnd={onDragEnd}>
         <CardsContainer>
           {COLUMN_IDS.map(columnId => (
@@ -198,27 +226,7 @@ export const App = () => {
           ))}
         </CardsContainer>
       </DragDropContext>
-
-      {/*
-      <ul>
-        <li className="big">
-          Groceries
-          <ul>
-            <li className="done">3 Tomatoes</li>
-            <li>1 bunch of cherries</li>
-            <li>6 onions</li>
-            <li className="done">3 heads of garlic</li>
-            <li>1 bag spring mix</li>
-          </ul>
-        </li>
-        <li className="done">Cancel gym membership</li>
-        <li>Clean gutters</li>
-        <li className="done">Take package to the post office</li>
-        <li className="done">Call Avery about Ali's party (afternoon)</li>
-        <li>Sort recycling & put out trash</li>
-      </ul>
-      */}
-    </main>
+    </>
   );
 };
 

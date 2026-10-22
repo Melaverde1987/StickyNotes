@@ -1,39 +1,12 @@
 import { useState } from 'react';
-import { Formik, Form, Field } from 'formik';
 import styled from 'styled-components';
 import { FiEdit2 } from 'react-icons/fi';
 import { MdDeleteOutline } from 'react-icons/md';
 import { Item } from 'components/Item';
+import { EditForm } from 'components/EditForm';
 
 export const Card = ({ editCard, deleteCard, toggleItemCompleted, card }) => {
   const [editingCardId, setEditingCardId] = useState(null);
-
-  const onEditSubmit = async values => {
-    try {
-      const texts = values.items
-        .split('\n')
-        .map(text => text.trim())
-        .filter(Boolean);
-
-      const updatedTask = {
-        title: values.title,
-        items: texts.map((text, index) => ({
-          ...card.items?.[index],
-          id: card.items?.[index]?.id ?? crypto.randomUUID(),
-          text,
-          completed: card.items?.[index]?.completed ?? false,
-        })),
-      };
-
-      const saved = await editCard(card.id, updatedTask);
-
-      if (saved) {
-        setEditingCardId(null);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const editTaskBtn = id => {
     setEditingCardId(id);
@@ -51,32 +24,11 @@ export const Card = ({ editCard, deleteCard, toggleItemCompleted, card }) => {
       </ButtonsHolder>
 
       {editingCardId === card.id ? (
-        <Formik
-          initialValues={{
-            title: card.title ?? '',
-            items: (card.items ?? []).map(item => item.text).join('\n'),
-          }}
-          onSubmit={values => onEditSubmit(values)}
-          onReset={() => setEditingCardId(null)}
-        >
-          <Form>
-            <div>
-              <Field type="text" name="title" placeholder="title" />
-            </div>
-
-            <div>
-              <Field
-                as="textarea"
-                name="items"
-                placeholder="add tasks"
-                rows={6}
-              />
-            </div>
-
-            <button type="submit">Save</button>
-            <button type="reset">Cancel</button>
-          </Form>
-        </Formik>
+        <EditForm
+          card={card}
+          editCard={editCard}
+          setEditingCardId={setEditingCardId}
+        />
       ) : (
         <>
           {card.title}

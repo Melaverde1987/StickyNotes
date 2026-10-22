@@ -44,17 +44,13 @@ export const GlobalStyle = createGlobalStyle`
         height: auto;
         min-height: 100vh;
         background-image: linear-gradient(to right bottom, rgb(243 239 239), rgba(137, 132, 132, 0.3));
-    }
-
-    main {
-        padding-block: 30px;
         width: 100%;
         max-width: 1100px;
         margin-left: auto;
         margin-right: auto;
     }
 
-      button {
+    button {
         cursor: pointer;
         border: none;
         background-color: transparent;
@@ -65,12 +61,13 @@ export const GlobalStyle = createGlobalStyle`
 
 
     h1 {
-        margin-top: 2rem;
         color: saddlebrown;
         position: relative;
         display: flex;
         align-items: center;
         font-size: 4rem;
+        margin-top: 0;
+        padding-top: 10px;
     }
 
     input, textarea {
