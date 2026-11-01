@@ -1,6 +1,18 @@
 import { Formik, Form, Field } from 'formik';
 import styled from 'styled-components';
 
+const COLORS = [
+  'lightgreen',
+  'lightpink',
+  'orange',
+  'gold',
+  'lightskyblue',
+  'mediumslateblue',
+  'snow',
+  'turquoise',
+  'chartreuse',
+];
+
 export const EditForm = ({ card, setEditingCardId, editCard }) => {
   const onEditSubmit = async values => {
     try {
@@ -10,6 +22,7 @@ export const EditForm = ({ card, setEditingCardId, editCard }) => {
         .filter(Boolean);
 
       const updatedTask = {
+        color: values.color,
         title: values.title,
         items: texts.map((text, index) => ({
           ...card.items?.[index],
@@ -32,6 +45,7 @@ export const EditForm = ({ card, setEditingCardId, editCard }) => {
   return (
     <Formik
       initialValues={{
+        color: card.color ?? 'lightgreen',
         title: card.title ?? '',
         items: (card.items ?? []).map(item => item.text).join('\n'),
       }}
@@ -40,43 +54,107 @@ export const EditForm = ({ card, setEditingCardId, editCard }) => {
     >
       <Form>
         <div>
+          <GroupLabel id="color-label">Card color</GroupLabel>
+          <ColorGroup role="group" aria-labelledby="color-label">
+            {COLORS.map(color => (
+              <ColorLabel key={color}>
+                <Field
+                  type="radio"
+                  name="color"
+                  value={color}
+                  aria-label={color}
+                />
+                <ColorSwatch $color={color} aria-hidden="true" />
+              </ColorLabel>
+            ))}
+          </ColorGroup>
+        </div>
+        <div>
           <Field type="text" name="title" placeholder="title" />
         </div>
 
         <div>
           <Field as="textarea" name="items" placeholder="add tasks" rows={6} />
         </div>
-
-        <Btn type="submit">Save</Btn>
-        <Btn type="reset">Cancel</Btn>
+        <BtnHolder>
+          <Btn type="submit">Save</Btn>
+          <Btn type="reset">Cancel</Btn>
+        </BtnHolder>
       </Form>
     </Formik>
   );
 };
 
-const Btn = styled.button`
-  padding: 10px 12px;
+const GroupLabel = styled.div`
+  font-family: ${({ theme }) => theme.fonts.secondary};
   font-size: 18px;
+  font-weight: 600;
+  color: #232121;
+`;
 
+const ColorGroup = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-block: 12px;
+`;
+
+const ColorLabel = styled.label`
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    opacity: 0;
+  }
+
+  input:checked + span {
+    outline: 2px solid midnightblue;
+    outline-offset: 4px;
+  }
+
+  input:focus-visible + span {
+    outline: 3px dashed midnightblue;
+    outline-offset: 4px;
+  }
+
+  &:hover span {
+    transform: scale(1.08);
+  }
+`;
+
+const ColorSwatch = styled.span`
+  display: block;
+  width: 26px;
+  height: 26px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  background-color: ${({ $color }) => $color};
+  transition: transform 0.2s;
+`;
+
+const BtnHolder = styled.div`
+  display: flex;
+  gap: 6px;
+`;
+
+const Btn = styled.button`
+  padding: 10px 18px;
+  font-size: 18px;
   position: relative;
   font-weight: 600;
-  background-color: transparent;
   border: none;
-  outline: none;
-  color: #000;
-  font-family: Arial, Helvetica, sans-serif;
-  cursor: pointer;
-  text-decoration: none;
-  user-select: none;
+  color: ${({ theme }) => theme.colors.text};
+  overflow: hidden;
+  font-family: ${({ theme }) => theme.fonts.secondary};
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-size: 16px;
-  overflow: hidden;
-  z-index: 1;
   border-radius: 5px;
-  padding: 13px 25px;
-  box-sizing: border-box;
 
   &:before {
     content: '';
@@ -86,10 +164,13 @@ const Btn = styled.button`
     right: 0;
     width: 100%;
     height: 2px;
-    background-color: white;
+    background-color: ${({ theme }) => theme.colors.text};
     z-index: -1;
     transition: all 0.3s;
-    box-sizing: border-box;
+  }
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.white};
   }
 
   &:hover::before {

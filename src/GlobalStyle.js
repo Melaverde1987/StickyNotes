@@ -50,6 +50,10 @@ export const GlobalStyle = createGlobalStyle`
         margin-right: auto;
     }
 
+    main {
+        overflow: auto;
+    }
+
     button {
         cursor: pointer;
         border: none;
@@ -61,13 +65,16 @@ export const GlobalStyle = createGlobalStyle`
 
 
     h1 {
-        color: saddlebrown;
-        position: relative;
-        display: flex;
-        align-items: center;
-        font-size: 4rem;
+        color: ${({ theme }) => theme.colors.text};
+        font-family: ${({ theme }) => theme.fonts.secondary};
+        font-size: 3rem;
         margin-top: 0;
         padding-top: 10px;
+        text-align: center;
+
+        @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+            font-size: 4rem;
+        }
     }
 
     input, textarea {

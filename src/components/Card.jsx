@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import { FiEdit2 } from 'react-icons/fi';
 import { MdDeleteOutline } from 'react-icons/md';
 import { Item } from 'components/Item';
@@ -13,14 +13,14 @@ export const Card = ({ editCard, deleteCard, toggleItemCompleted, card }) => {
   };
 
   return (
-    <CardContainer>
+    <CardContainer $color={card.color}>
       <ButtonsHolder>
-        <Btn type="button" onClick={() => editTaskBtn(card.id)}>
+        <BtnEdit type="button" onClick={() => editTaskBtn(card.id)}>
           <FiEdit2 />
-        </Btn>
-        <Btn type="button" onClick={() => deleteCard(card.id)}>
+        </BtnEdit>
+        <BtnDelete type="button" onClick={() => deleteCard(card.id)}>
           <MdDeleteOutline />
-        </Btn>
+        </BtnDelete>
       </ButtonsHolder>
 
       {editingCardId === card.id ? (
@@ -53,6 +53,26 @@ export const Card = ({ editCard, deleteCard, toggleItemCompleted, card }) => {
   );
 };
 
+const BtnEdit = styled.button`
+  padding: 10px 6px;
+  line-height: 0;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+`;
+
+const BtnDelete = styled.button`
+  padding: 10px 6px;
+  line-height: 0;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+`;
+
 const CardContainer = styled.div`
   list-style: none;
   font-size: 2.4rem;
@@ -65,6 +85,22 @@ const CardContainer = styled.div`
   cursor: pointer;
   position: relative;
   transition: transform 0.3s;
+  background-color: ${({ $color }) => $color || 'lightgreen'};
+
+  @media (hover: hover) and (pointer: fine) {
+    ${BtnEdit},
+    ${BtnDelete} {
+      visibility: hidden;
+    }
+
+    &:hover,
+    &:focus-within {
+      ${BtnEdit},
+      ${BtnDelete} {
+        visibility: visible;
+      }
+    }
+  }
 
   &:before {
     content: '';
@@ -101,7 +137,8 @@ const CardContainer = styled.div`
 
   &:hover {
     --levitate: 1;
-    &::before {
+
+    &:before {
       transform: translate3d(6rem, 1rem, -1px)
         scale(calc(1 - var(--levitate) * 0.1)) rotate(1.5deg);
       filter: blur(8px);
@@ -124,14 +161,4 @@ const ButtonsHolder = styled.div`
   position: absolute;
   right: 0;
   top: 0;
-`;
-
-const Btn = styled.button`
-  padding: 10px 6px;
-  line-height: 0;
-
-  svg {
-    width: 20px;
-    height: 20px;
-  }
 `;

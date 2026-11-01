@@ -2,10 +2,10 @@ import '@fontsource/grape-nuts';
 
 export const theme = {
   colors: {
-    text: '#141414',
+    text: '#232121',
     body: '#efefef',
     primary500: 'lightgreen',
-    secondary: '#191970',
+    secondary: 'midnightblue',
     white: '#ffffff',
     black: '#000000',
     gray500: '#ededed',
@@ -17,6 +17,7 @@ export const theme = {
 
   fonts: {
     primary: "'Grape Nuts', cursive",
+    secondary: 'Arial, Helvetica, sans-serif',
   },
 
   spacing: {

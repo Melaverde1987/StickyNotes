@@ -1,14 +1,16 @@
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import styled from 'styled-components';
 import { IoMdAdd } from 'react-icons/io';
 
-export const AddCard = ({ addCard }) => {
+export const AddCard = ({ addCard, column }) => {
+  console.log(column);
   return (
     <AddCardContainer>
       <Formik
         initialValues={{
           title: '',
           completed: false,
+          columnId: column,
         }}
         onSubmit={(values, actions) => {
           console.log('values', values);
@@ -17,14 +19,6 @@ export const AddCard = ({ addCard }) => {
         }}
       >
         <Form>
-          <div>
-            <Field type="hidden" name="title" />
-          </div>
-
-          <div>
-            <Field type="hidden" name="completed" />
-          </div>
-
           <AddButton type="submit">
             <IoMdAdd />
           </AddButton>
@@ -35,37 +29,19 @@ export const AddCard = ({ addCard }) => {
 };
 
 const AddCardContainer = styled.div`
-  //border: 2px dashed gray;
   height: fit-content;
-  width: fit-content;
-  padding-bottom: 20px;
 `;
 
 const AddButton = styled.button`
-  /*
-  padding: 20px;
-  min-width: 100px;
-  min-height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  svg {
-    width: 24px;
-    height: 24px;
-  }
-    */
-
   --i: var(--light, 0);
   --not-i: calc(1 - var(--i));
   --j: var(--press, 0);
   --not-j: calc(1 - var(--j));
   z-index: var(--i);
-  border: none;
   line-height: 0;
-  width: 2em;
+  width: 100%;
   height: 2em;
-  border-radius: 15%;
+  border-radius: 10px;
   transform: scale(calc(1 - var(--j) * 0.02));
   box-shadow:
     calc(var(--not-j) * -0.25em) calc(var(--not-j) * -0.25em) 0.25em

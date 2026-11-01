@@ -184,7 +184,7 @@ export const CardsList = () => {
           wrapperClass=""
         />
       )}
-      <AddCard addCard={addCard} />
+      {/*<AddCard addCard={addCard} />*/}
       <DragDropContext onDragEnd={onDragEnd}>
         <CardsContainer>
           {COLUMN_IDS.map(columnId => (
@@ -220,6 +220,7 @@ export const CardsList = () => {
                     ))}
 
                   {provided.placeholder}
+                  <AddCard addCard={addCard} column={columnId} />
                 </CardsColumn>
               )}
             </Droppable>
@@ -232,9 +233,15 @@ export const CardsList = () => {
 
 export const CardsContainer = styled.div`
   display: grid;
+  width: max-content;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
   align-items: stretch;
+  padding-inline: 20px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 100%;
+  }
 `;
 
 export const CardsColumn = styled.div`
@@ -276,23 +283,5 @@ const CardHolder = styled.div`
       )
       rotate(0.5deg) rotateX(calc(var(--levitate) * 6deg))
       rotateY(calc(var(--levitate) * -3deg));
-  }
-
-  &:nth-child(2n) {
-    > div {
-      background-color: lightskyblue;
-    }
-  }
-
-  &:nth-child(3n) {
-    > div {
-      background-color: lightgoldenrodyellow;
-    }
-  }
-
-  &:nth-child(4n) {
-    > div {
-      background-color: pink;
-    }
   }
 `;
