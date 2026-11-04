@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/StickyNotes/static/css/main.6af0a0fd.css",
-    "main.js": "/StickyNotes/static/js/main.e9e351df.js",
+    "main.js": "/StickyNotes/static/js/main.d34e3bcc.js",
     "static/media/grape-nuts-latin-400-normal.woff2": "/StickyNotes/static/media/grape-nuts-latin-400-normal.cc7b67eb6bec7653ed62.woff2",
     "static/media/grape-nuts-latin-400-normal.woff": "/StickyNotes/static/media/grape-nuts-latin-400-normal.2f4042b0352232e598d4.woff",
     "static/media/grape-nuts-latin-ext-400-normal.woff2": "/StickyNotes/static/media/grape-nuts-latin-ext-400-normal.b34f787fefe0f5486690.woff2",
@@ -10,10 +10,10 @@
     "static/media/grape-nuts-vietnamese-400-normal.woff": "/StickyNotes/static/media/grape-nuts-vietnamese-400-normal.0f32374c8a7417d34837.woff",
     "index.html": "/StickyNotes/index.html",
     "main.6af0a0fd.css.map": "/StickyNotes/static/css/main.6af0a0fd.css.map",
-    "main.e9e351df.js.map": "/StickyNotes/static/js/main.e9e351df.js.map"
+    "main.d34e3bcc.js.map": "/StickyNotes/static/js/main.d34e3bcc.js.map"
   },
   "entrypoints": [
     "static/css/main.6af0a0fd.css",
-    "static/js/main.e9e351df.js"
+    "static/js/main.d34e3bcc.js"
   ]
 }
