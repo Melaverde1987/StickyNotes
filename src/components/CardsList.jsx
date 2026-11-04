@@ -186,7 +186,6 @@ export const CardsList = () => {
           wrapperClass=""
         />
       )}
-      {/*<AddCard addCard={addCard} />*/}
       <DragDropContext onDragEnd={onDragEnd}>
         <CardsContainer>
           {COLUMN_IDS.map(columnId => (
