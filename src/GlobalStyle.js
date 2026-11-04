@@ -82,13 +82,13 @@ export const GlobalStyle = createGlobalStyle`
         border: none;
         padding: 10px;
         background: transparent;
-        border-bottom: 1px solid ${({ theme }) => theme.fonts.secondary500};
-        color: ${({ theme }) => theme.fonts.secondary500};
+        border-bottom: 1px solid ${({ theme }) => theme.colors.secondary500};
+        color: ${({ theme }) => theme.colors.secondary500};
 
         &:focus, &:focus-visible {
             border: none; 
             outline: none;
-            border-bottom: 1px solid ${({ theme }) => theme.fonts.secondary500};
+            border-bottom: 1px solid ${({ theme }) => theme.colors.secondary500};
         }
     }
 `;

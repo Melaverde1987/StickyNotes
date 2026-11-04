@@ -75,7 +75,7 @@ const BtnDelete = styled.button`
 
 const CardContainer = styled.div`
   font-size: 2.4rem;
-  color: ${({ theme }) => theme.fonts.secondary500};
+  color: ${({ theme }) => theme.colors.secondary500};
   --levitate: 0;
   padding: 30px;
   background-color: ${({ theme }) => theme.fonts.primary500};

@@ -115,12 +115,12 @@ const ColorLabel = styled.label`
   }
 
   input:checked + span {
-    outline: 2px solid ${({ theme }) => theme.fonts.secondary500};
+    outline: 2px solid ${({ theme }) => theme.colors.secondary500};
     outline-offset: 4px;
   }
 
   input:focus-visible + span {
-    outline: 3px dashed ${({ theme }) => theme.fonts.secondary500};
+    outline: 3px dashed ${({ theme }) => theme.colors.secondary500};
     outline-offset: 4px;
   }
 
