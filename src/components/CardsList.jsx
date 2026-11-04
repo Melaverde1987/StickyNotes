@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTheme } from 'styled-components';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import styled from 'styled-components';
 import { ThreeCircles } from 'react-loader-spinner';
@@ -17,6 +18,7 @@ import { AddCard } from 'components/AddCard';
 const COLUMN_IDS = ['column-1', 'column-2', 'column-3'];
 
 export const CardsList = () => {
+  const theme = useTheme();
   const [allCards, setAllCards] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -171,7 +173,7 @@ export const CardsList = () => {
           visible={true}
           height="100"
           width="100"
-          color="lightgreen"
+          color={theme.fonts.primary500}
           ariaLabel="three-circles-loading"
           wrapperStyle={{
             position: 'absolute',

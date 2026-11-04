@@ -1,3 +1,4 @@
+import { useTheme } from 'styled-components';
 import { Formik, Form, Field } from 'formik';
 import styled from 'styled-components';
 
@@ -14,6 +15,7 @@ const COLORS = [
 ];
 
 export const EditForm = ({ card, setEditingCardId, editCard }) => {
+  const theme = useTheme();
   const onEditSubmit = async values => {
     try {
       const texts = values.items
@@ -45,7 +47,7 @@ export const EditForm = ({ card, setEditingCardId, editCard }) => {
   return (
     <Formik
       initialValues={{
-        color: card.color ?? 'lightgreen',
+        color: card.color ?? theme.fonts.primary500,
         title: card.title ?? '',
         items: (card.items ?? []).map(item => item.text).join('\n'),
       }}
@@ -89,7 +91,7 @@ const GroupLabel = styled.div`
   font-family: ${({ theme }) => theme.fonts.secondary};
   font-size: 18px;
   font-weight: 600;
-  color: #232121;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 const ColorGroup = styled.div`
@@ -113,12 +115,12 @@ const ColorLabel = styled.label`
   }
 
   input:checked + span {
-    outline: 2px solid midnightblue;
+    outline: 2px solid ${({ theme }) => theme.fonts.secondary500};
     outline-offset: 4px;
   }
 
   input:focus-visible + span {
-    outline: 3px dashed midnightblue;
+    outline: 3px dashed ${({ theme }) => theme.fonts.secondary500};
     outline-offset: 4px;
   }
 

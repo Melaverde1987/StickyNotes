@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { IoMdAdd } from 'react-icons/io';
 
 export const AddCard = ({ addCard, column }) => {
-  console.log(column);
   return (
     <AddCardContainer>
       <Formik
@@ -13,7 +12,6 @@ export const AddCard = ({ addCard, column }) => {
           columnId: column,
         }}
         onSubmit={(values, actions) => {
-          console.log('values', values);
           addCard(values);
           actions.resetForm();
         }}
@@ -52,7 +50,7 @@ const AddButton = styled.button`
       rgba(210, 218, 230, var(--j)),
     inset calc(var(--j) * -0.25em) calc(var(--j) * -0.25em) 0.25em
       rgba(252, 252, 252, var(--j));
-  background: #e8e8e8;
+  background: ${({ theme }) => theme.colors.gray500};
   font-size: 2.5em;
   transition:
     box-shadow 0.3s,
@@ -67,7 +65,7 @@ const AddButton = styled.button`
     --light: 1;
 
     svg {
-      color: gray;
+      color: ${({ theme }) => theme.colors.gray600};
     }
   }
 
@@ -76,7 +74,7 @@ const AddButton = styled.button`
   }
 
   svg {
-    color: darkgrey;
+    color: ${({ theme }) => theme.colors.gray700};
     transition: all 300ms;
   }
 `;

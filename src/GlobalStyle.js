@@ -28,7 +28,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     ::selection {
-        background: ${({ theme }) => theme.colors.secondary};
+        background: ${({ theme }) => theme.colors.secondary500};
         color: ${({ theme }) => theme.colors.white};
     }
 
@@ -66,7 +66,7 @@ export const GlobalStyle = createGlobalStyle`
 
     h1 {
         color: ${({ theme }) => theme.colors.text};
-        font-family: ${({ theme }) => theme.fonts.secondary};
+        font-family: ${({ theme }) => theme.fonts.secondary500};
         font-size: 3rem;
         margin-top: 0;
         padding-top: 10px;
@@ -82,13 +82,13 @@ export const GlobalStyle = createGlobalStyle`
         border: none;
         padding: 10px;
         background: transparent;
-        border-bottom: 1px solid midnightblue;
-        color: midnightblue;
+        border-bottom: 1px solid ${({ theme }) => theme.fonts.secondary500};
+        color: ${({ theme }) => theme.fonts.secondary500};
 
         &:focus, &:focus-visible {
             border: none; 
             outline: none;
-            border-bottom: 1px solid midnightblue;
+            border-bottom: 1px solid ${({ theme }) => theme.fonts.secondary500};
         }
     }
 `;

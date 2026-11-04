@@ -74,18 +74,17 @@ const BtnDelete = styled.button`
 `;
 
 const CardContainer = styled.div`
-  list-style: none;
   font-size: 2.4rem;
-  color: midnightblue;
+  color: ${({ theme }) => theme.fonts.secondary500};
   --levitate: 0;
   padding: 30px;
-  background-color: lightgreen;
+  background-color: ${({ theme }) => theme.fonts.primary500};
   position: relative;
   transform-style: preserve-3d;
   cursor: pointer;
   position: relative;
   transition: transform 0.3s;
-  background-color: ${({ $color }) => $color || 'lightgreen'};
+  background-color: ${({ $color, theme }) => $color || theme.colors.primary500};
 
   @media (hover: hover) and (pointer: fine) {
     ${BtnEdit},
@@ -94,7 +93,8 @@ const CardContainer = styled.div`
     }
 
     &:hover,
-    &:focus-within {
+    &:focus-within,
+    &:focus-visible {
       ${BtnEdit},
       ${BtnDelete} {
         visibility: visible;
